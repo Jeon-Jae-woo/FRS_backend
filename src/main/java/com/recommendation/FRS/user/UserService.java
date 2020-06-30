@@ -1,5 +1,6 @@
 package com.recommendation.FRS.user;
 
+import com.recommendation.FRS.exception.CustomException;
 import com.recommendation.FRS.exception.UserException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -56,7 +57,7 @@ public class UserService {
     // 로그인 서비스 추가 필요
     public String Auth(Map<String,String> user){
         User findUser = userRepository.findByEmail(user.get("email"))
-                .orElseThrow(() -> new UserException.UserNotFoundException("Unsubscribed Email"));
+                .orElseThrow(() -> new CustomException.NotFoundException("Unsubscribed Email"));
         if (!passwordEncoder.matches(user.get("password"), findUser.getPassword())) {
             throw new UserException.UserAuthenticationException("Invalid Password");
         }
@@ -67,7 +68,7 @@ public class UserService {
     // 유저 정보 조회
     public User findUser(String email){
         User user = userRepository.findByEmail(email)
-                .orElseThrow(()-> new UserException.UserNotFoundException(String.format("UserNotFoundException [%s]", email)));
+                .orElseThrow(()-> new CustomException.NotFoundException(String.format("UserNotFoundException [%s]", email)));
         return user;
     }
 
@@ -75,8 +76,6 @@ public class UserService {
     public User UpdateUser(User user, User newUser){
         try{
             user.setAge(newUser.getAge());
-            System.out.println(newUser.getAge());
-            System.out.println(newUser.getNationality());
             user.setNationality(newUser.getNationality());
             user.setName(newUser.getName());
             User updateUser = userRepository.save(user);
@@ -100,6 +99,8 @@ public class UserService {
             String headerEmail = authentication.getName();
             return headerEmail;
         }
-        return null;
+        else{
+            throw new UserException.UserAuthenticationException("token not valid");
+        }
     }
 }
