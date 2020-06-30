@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
+    // 500 에러
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<Object> AllException(Exception e, WebRequest request){
         ExceptionMessage exceptionMessage =
@@ -21,6 +22,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity(exceptionMessage, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    // 잘못된 요청을 했을 경우
     @ExceptionHandler(NullPointerException.class)
     public final ResponseEntity<Object> NullPointException(Exception e, WebRequest request){
         ExceptionMessage exceptionMessage =
@@ -35,7 +37,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity(exceptionMessage, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(UserException.UserNotFoundException.class)
+    @ExceptionHandler(CustomException.NotFoundException.class)
     public final ResponseEntity<Object> UserNotFoundException(Exception e, WebRequest request){
         ExceptionMessage exceptionMessage =
                 new ExceptionMessage(LocalDateTime.now(), e.getMessage(), request.getDescription(false));

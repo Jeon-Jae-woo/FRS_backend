@@ -2,6 +2,8 @@ package com.recommendation.FRS.user;
 
 import com.recommendation.FRS.exception.UserException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
@@ -45,12 +47,12 @@ public class UserController {
 
     // 유저 정보 조회 엔드포인트
     @GetMapping("/users/{email}")
-    public EntityModel<User> UserDetails(@PathVariable String email, ServletRequest request){
+    public EntityModel<User> LoadUser(@PathVariable String email, ServletRequest request){
         String headerEmail = userService.authUser(request);
         User user = userService.findUser(email);
 
         if(user.getEmail() != headerEmail){
-            throw new IllegalArgumentException("User not match");
+            throw new UserException.UserAuthenticationException("User not match");
         }
 
         // U,D 엔드포인트 제공
