@@ -99,5 +99,10 @@ public class UserController {
         return allUser;
     }
     */
+    // test
+    @GetMapping("/hello")
+    public String hello(){
+        return "hello";
+    }
 
 }
