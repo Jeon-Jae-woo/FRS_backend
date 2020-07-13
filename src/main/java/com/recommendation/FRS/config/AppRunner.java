@@ -25,6 +25,7 @@ public class AppRunner implements ApplicationRunner {
                 .nationality("Korea")
                 .name("ADMIN")
                 .email("ADMIN_EMAIL")
+                .gender("man")
                 .password(passwordEncoder.encode("admin1!"))
                 .roles(Collections.singletonList("ROLE_ADMIN"))
                 .build());

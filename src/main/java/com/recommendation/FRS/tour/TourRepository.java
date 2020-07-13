@@ -9,4 +9,7 @@ public interface TourRepository extends JpaRepository<Tour, Long> {
     Page<TourMapping> findByTourNameContaining(String name, Pageable pageable);
     Page<TourMapping> findAllBy(Pageable pageable);
 
+    //테마 ?
+    Page<TourMapping> findByAddressContaining(String Address, Pageable pageable);
+
 }

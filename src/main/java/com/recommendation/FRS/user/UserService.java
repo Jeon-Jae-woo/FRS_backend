@@ -42,6 +42,7 @@ public class UserService {
                 User createdUser = userRepository.save(User.builder()
                         .age(Long.parseLong(user.get("age")))
                         .nationality(user.get("nationality"))
+                        .gender(user.get("gender"))
                         .name(user.get("name"))
                     .email(user.get("email"))
                     .password(passwordEncoder.encode(user.get("password")))

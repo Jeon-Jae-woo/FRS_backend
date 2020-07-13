@@ -44,6 +44,9 @@ public class User implements UserDetails{
     @Column(length = 100, nullable = false)
     private String nationality;
 
+    @Column(length = 100, nullable = false)
+    private String gender;
+
     @CreationTimestamp
     private LocalDateTime createAt;
     @UpdateTimestamp
