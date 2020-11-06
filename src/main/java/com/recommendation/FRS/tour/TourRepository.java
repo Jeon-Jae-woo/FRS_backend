@@ -6,10 +6,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TourRepository extends JpaRepository<Tour, Long> {
 
+    // tour name search
     Page<TourMapping> findByTourNameContaining(String name, Pageable pageable);
+
+    // all tour
     Page<TourMapping> findAllBy(Pageable pageable);
 
-    //테마 ?
+    // location
     Page<TourMapping> findByAddressContaining(String Address, Pageable pageable);
+
+    // Thema
+    Page<TourMapping> findByBigColContaining(String BigCol, Pageable pageable);
 
 }

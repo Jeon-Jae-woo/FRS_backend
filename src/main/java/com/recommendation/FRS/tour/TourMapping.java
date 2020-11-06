@@ -8,4 +8,6 @@ public interface TourMapping {
     String getBigCol();
     String getMidCol();
     String getSmallCol();
+    String getAddress();
+    String getSummery();
 }

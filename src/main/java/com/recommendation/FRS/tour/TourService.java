@@ -24,6 +24,31 @@ public class TourService {
         }
     }
 
+    public Page<TourMapping> FindLocationTour(String location, int page){
+        PageRequest pageRequest = PageRequest.of(page, 10);
+        if(location == null){
+            throw new CustomException.NotFoundException("Tour Not Found");
+        }
+        else{
+            Page<TourMapping> tourLocation = tourRepository.findByAddressContaining(location, pageRequest);
+            return tourLocation;
+        }
+
+    }
+
+    public Page<TourMapping> FindThemaTour(String thema, int page){
+        PageRequest pageRequest = PageRequest.of(page,10);
+        if(thema == null){
+            throw new CustomException.NotFoundException("Tour Not Found");
+        }
+        else{
+            Page<TourMapping> tourThema = tourRepository.findByBigColContaining(thema, pageRequest);
+            return tourThema;
+        }
+    }
+
+
+
     public Tour LoadTour(long id){
         Tour tour = tourRepository.findById(id)
                 .orElseThrow(() -> new CustomException.NotFoundException("Tour Not Found"));

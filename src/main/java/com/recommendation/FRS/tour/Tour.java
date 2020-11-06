@@ -33,7 +33,7 @@ public class Tour {
     private String longitude;
     private String latitude;
 
-    @Column(length=2000)
+    @Column(length=10000)
     private String summery;
 
 }

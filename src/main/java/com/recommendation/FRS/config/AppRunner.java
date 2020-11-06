@@ -22,10 +22,10 @@ public class AppRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         userRepository.save(User.builder()
                 .age(Long.parseLong("10"))
-                .nationality("Korea")
+                .nationality("USA")
                 .name("ADMIN")
                 .email("ADMIN_EMAIL")
-                .gender("man")
+                .gender("Men")
                 .password(passwordEncoder.encode("admin1!"))
                 .roles(Collections.singletonList("ROLE_ADMIN"))
                 .build());

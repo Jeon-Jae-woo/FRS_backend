@@ -36,4 +36,22 @@ public class TourController {
         return entityModel;
     }
 
+    @GetMapping("/tour/list/address")
+    public HttpEntity<PagedResourcesAssembler<Tour>> TourLocation(
+            @Param(value="location")String location, @RequestParam(value = "page", defaultValue = "0")int page,
+                PagedResourcesAssembler assembler) {
+
+        Page<TourMapping> tourLocation = tourService.FindLocationTour(location, page);
+        return new ResponseEntity(assembler.toModel(tourLocation), HttpStatus.OK);
+    }
+
+    @GetMapping("/tour/list/{thema}")
+    public HttpEntity<PagedResourcesAssembler<Tour>> TourThema(
+            @PathVariable String thema, @RequestParam(value = "page", defaultValue = "0")int page,
+            PagedResourcesAssembler assembler
+    ){
+        Page<TourMapping> tourList = tourService.FindThemaTour(thema,page);
+        return new ResponseEntity(assembler.toModel(tourList), HttpStatus.OK);
+    }
+
 }
